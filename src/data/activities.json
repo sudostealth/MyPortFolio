@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "title": "General Secretary",
+    "organization": "University Cybersecurity Club",
+    "period": "2023 - 2024",
+    "description": "Led a team of 50+ members, organized CTF competitions, workshops, and guest lectures from industry professionals.",
+    "icon": "Users"
+  },
+  {
+    "id": 2,
+    "title": "Organizing Secretary",
+    "organization": "Tech Fest 2024",
+    "period": "2024",
+    "description": "Coordinated a university-wide tech fest with 500+ participants, including hackathons, coding competitions, and security challenges.",
+    "icon": "Calendar"
+  },
+  {
+    "id": 3,
+    "title": "CTF Team Captain",
+    "organization": "University CTF Team",
+    "period": "2022 - Present",
+    "description": "Lead competitive CTF team, achieving top 10 rankings in national competitions. Mentor junior members in web exploitation and reverse engineering.",
+    "icon": "Trophy"
+  },
+  {
+    "id": 4,
+    "title": "Security Workshop Facilitator",
+    "organization": "Community Outreach",
+    "period": "2023 - Present",
+    "description": "Conduct monthly security awareness workshops for students and local businesses on topics like phishing prevention and password security.",
+    "icon": "Presentation"
+  }
+]

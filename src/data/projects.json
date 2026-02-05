@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Network Vulnerability Scanner",
+    "description": "Automated network reconnaissance and vulnerability assessment tool built with Python. Features include port scanning, service enumeration, and CVE mapping.",
+    "image": "/images/projects/scanner.png",
+    "tags": ["Python", "Nmap", "Security", "Automation"],
+    "github": "https://github.com/yourusername/vuln-scanner",
+    "demo": null,
+    "category": "Security Tool"
+  },
+  {
+    "id": 2,
+    "title": "Web Application Fuzzer",
+    "description": "Custom fuzzing tool for discovering hidden endpoints, parameters, and potential injection points in web applications.",
+    "image": "/images/projects/fuzzer.png",
+    "tags": ["Python", "Web Security", "Fuzzing", "Burp Suite"],
+    "github": "https://github.com/yourusername/web-fuzzer",
+    "demo": null,
+    "category": "Security Tool"
+  },
+  {
+    "id": 3,
+    "title": "CTF Writeups Repository",
+    "description": "Comprehensive writeups for various Capture The Flag challenges from platforms like HackTheBox, TryHackMe, and PicoCTF.",
+    "image": "/images/projects/ctf.png",
+    "tags": ["CTF", "Writeups", "Security Research"],
+    "github": "https://github.com/yourusername/ctf-writeups",
+    "demo": "https://yourblog.com/writeups",
+    "category": "Documentation"
+  },
+  {
+    "id": 4,
+    "title": "Phishing Detection System",
+    "description": "Machine learning-based system for detecting phishing URLs and emails using NLP and URL feature analysis.",
+    "image": "/images/projects/phishing.png",
+    "tags": ["Python", "Machine Learning", "Security", "NLP"],
+    "github": "https://github.com/yourusername/phishing-detector",
+    "demo": null,
+    "category": "Security Tool"
+  },
+  {
+    "id": 5,
+    "title": "Red Team Toolkit",
+    "description": "Collection of custom scripts and tools for Red Team engagements including enumeration, privilege escalation, and persistence.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-HjUKNhdHRkIHHLohufKnVbihCgGpQyQVbA&s",
+    "tags": ["Python", "Bash", "Red Team", "Automation"],
+    "github": "https://github.com/yourusername/red-team-toolkit",
+    "demo": null,
+    "category": "Security Tool"
+  },
+  {
+    "id": 6,
+    "title": "Security Dashboard",
+    "description": "Real-time security monitoring dashboard for visualizing network traffic, alerts, and system health metrics.",
+    "image": "/images/projects/dashboard.png",
+    "tags": ["React", "Node.js", "Security", "Dashboard"],
+    "github": "https://github.com/yourusername/security-dashboard",
+    "demo": "https://demo.yourdomain.com",
+    "category": "Web Application"
+  }
+]

@@ -1,0 +1,79 @@
+{
+  "offensive": {
+    "title": "Offensive Security",
+    "icon": "Crosshair",
+    "color": "text-red-500",
+    "skills": [
+      { "name": "Penetration Testing", "level": 90 },
+      { "name": "Nmap", "level": 95 },
+      { "name": "Burp Suite", "level": 88 },
+      { "name": "Metasploit", "level": 85 },
+      { "name": "Web App Security", "level": 87 },
+      { "name": "Network Security", "level": 82 }
+    ]
+  },
+  "defensive": {
+    "title": "Defensive Security",
+    "icon": "Shield",
+    "color": "text-indigo-500",
+    "skills": [
+      { "name": "SIEM (Splunk)", "level": 80 },
+      { "name": "Suricata", "level": 75 },
+      { "name": "Snort", "level": 78 },
+      { "name": "Blue Team Tools", "level": 82 },
+      { "name": "Incident Response", "level": 85 },
+      { "name": "Forensics", "level": 80 }
+    ]
+  },
+  "programming": {
+    "title": "Programming",
+    "icon": "Code",
+    "color": "text-blue-500",
+    "skills": [
+      { "name": "Python", "level": 92 },
+      { "name": "Bash Scripting", "level": 88 },
+      { "name": "C/C++", "level": 75 },
+      { "name": "JavaScript", "level": 70 },
+      { "name": "SQL", "level": 80 },
+      { "name": "PowerShell", "level": 72 }
+    ]
+  },
+  "cloud": {
+    "title": "Cloud & DevOps",
+    "icon": "Server",
+    "color": "text-cyan-500",
+    "skills": [
+      { "name": "Docker", "level": 85 },
+      { "name": "Kubernetes", "level": 70 },
+      { "name": "AWS", "level": 75 },
+      { "name": "Azure", "level": 70 },
+      { "name": "Terraform", "level": 65 },
+      { "name": "CI/CD", "level": 80 }
+    ]
+  },
+  "tools": {
+    "title": "Tools & OS",
+    "icon": "Terminal",
+    "color": "text-green-500",
+    "skills": [
+      { "name": "Kali Linux", "level": 95 },
+      { "name": "Wireshark", "level": 88 },
+      { "name": "Git", "level": 88 },
+      { "name": "Nessus", "level": 78 },
+      { "name": "Hashcat", "level": 82 },
+      { "name": "Postman", "level": 85 }
+    ]
+  },
+  "other": [
+    "OWASP Top 10",
+    "API Security",
+    "Active Directory",
+    "Reverse Engineering",
+    "Malware Analysis",
+    "Cryptography",
+    "Linux Administration",
+    "Social Engineering",
+    "OSINT",
+    "Mobile Security"
+  ]
+}

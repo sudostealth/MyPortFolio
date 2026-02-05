@@ -1,0 +1,16 @@
+{
+  "name": "MD. SAZIB",
+  "title": "Cybersecurity Enthusiast",
+  "subtitle": "Red Team Specialist | Ethical Hacker",
+  "email": "mdsazib.cse@gmail.com",
+  "phone": "+880 1234 567890",
+  "location": "Your City, Country",
+  "bio": "I'm a 4th-year Computer Science & Engineering student with an unwavering passion for offensive security and Red Teaming. My journey began with curiosity about how systems break, evolving into a dedicated pursuit of mastering the art of ethical hacking. I specialize in penetration testing, vulnerability assessment, and security research. When I'm not hunting bugs, you'll find me contributing to security communities and exploring the latest attack vectors.",
+  "resumeUrl": "/resume.pdf",
+  "avatar": "/md-sazib.png",
+  "stats": {
+    "ctfChallenges": "50+",
+    "tryhackmeRank": "SudoStealth",
+    "projects": "20+"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "ongoing": [
+    {
+      "id": "thesis-1",
+      "title": "Advanced Threat Detection using Machine Learning in IoT Networks",
+      "description": "Investigating novel approaches to detect aberrant behavior in IoT devices using lightweight ML models. The research focuses on identifying zero-day attacks and minimizing false positives in real-time constrained environments.",
+      "role": "Lead Researcher",
+      "institution": "Green University of Bangladesh",
+      "status": "In Progress",
+      "supervisor": "Dr. Example Supervisor",
+      "startDate": "January 2025",
+      "tags": ["IoT Security", "Machine Learning", "Intrusion Detection", "Python"]
+    }
+  ],
+  "completed": []
+}

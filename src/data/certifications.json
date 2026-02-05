@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "eJPT",
+    "fullName": "eLearnSecurity Junior Penetration Tester",
+    "issuer": "INE Security",
+    "date": "2024",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-HjUKNhdHRkIHHLohufKnVbihCgGpQyQVbA&s",
+    "url": "https://my.ine.com/certificate/your-cert-id",
+    "description": "Entry-level penetration testing certification covering networking, web apps, and system security."
+  },
+  {
+    "id": 2,
+    "name": "PNPT",
+    "fullName": "Practical Network Penetration Tester",
+    "issuer": "TCM Security",
+    "date": "2024",
+    "image": "/images/certs/pnpt.png",
+    "url": "https://certifications.tcm-sec.com/your-cert-id",
+    "description": "Practical pentesting certification with real-world simulation and professional report writing."
+  },
+  {
+    "id": 3,
+    "name": "HTB Pro Hacker",
+    "fullName": "HackTheBox Pro Hacker",
+    "issuer": "HackTheBox",
+    "date": "2024",
+    "image": "/images/certs/htb.png",
+    "url": "https://app.hackthebox.com/profile/yourid",
+    "description": "Achieved Pro Hacker rank on HackTheBox platform demonstrating advanced offensive security skills."
+  },
+  {
+    "id": 4,
+    "name": "THM Top 1%",
+    "fullName": "TryHackMe Top 1% Globally",
+    "issuer": "TryHackMe",
+    "date": "2024",
+    "image": "/images/certs/thm.png",
+    "url": "https://tryhackme.com/p/yourusername",
+    "description": "Ranked in the top 1% of users on TryHackMe platform with multiple completed learning paths."
+  }
+]

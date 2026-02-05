@@ -1,0 +1,10 @@
+[
+  {
+    "id": "thm-live-badge",
+    "type": "iframe",
+    "src": "https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3673017",
+    "title": "TryHackMe Badge",
+    "width": "100%",
+    "height": "200"
+  }
+]

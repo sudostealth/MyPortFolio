@@ -36,6 +36,7 @@ const getSlug = (name: string) => {
   // Custom mappings for common tricky ones
   const map: Record<string, string> = {
     "c/c++": "cplusplus",
+    "c": "c",
     "c++": "cplusplus",
     "c#": "csharp",
     ".net": "dot-net",
@@ -43,6 +44,11 @@ const getSlug = (name: string) => {
     "kali linux": "kalilinux",
     "bash scripting": "gnubash",
     "burp suite": "burpsuite",
+    "vscode": "visualstudiocode",
+    "linux": "linux",
+    "wazuh": "wazuh",
+    "wireshark": "wireshark",
+    "docker": "docker"
   };
 
   const lower = name.toLowerCase();
@@ -136,43 +142,53 @@ export function Skills() {
                   </div>
                 </div>
 
-                {/* Skills Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {category.skills.map((skill: Skill, skillIndex: number) => (
-                    <motion.div
-                      key={skill.name}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ 
-                        delay: index * 0.1 + skillIndex * 0.05,
-                        type: "spring",
-                        stiffness: 100 
-                      }}
-                      whileHover={{ 
-                        y: -5,
-                        scale: 1.02,
-                        transition: { duration: 0.2 }
-                      }}
-                      className="group"
-                    >
-                      <Card 
-                        variant="default"
-                        hover={false} 
-                        className={`h-full flex flex-col items-center justify-center p-6 gap-4 text-center border-border/50 hover:border-${colorBase}-500/50 hover:shadow-[0_0_20px_rgba(0,0,0,0.2)] dark:hover:shadow-${colorBase}-500/10 transition-all duration-300`}
+                {/* Skills Scrolling Effect Wrapper */}
+                <div className="relative overflow-hidden w-full group/marquee pb-4 pt-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+                  <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-r from-background-secondary/50 via-background-secondary/20 to-transparent z-10 pointer-events-none" />
+                  <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-l from-background-secondary/50 via-background-secondary/20 to-transparent z-10 pointer-events-none" />
+
+                  <motion.div
+                    className="flex gap-4 sm:gap-6 min-w-max"
+                    animate={{
+                      x: ["0%", "-50%"]
+                    }}
+                    transition={{
+                      duration: 25,
+                      ease: "linear",
+                      repeat: Infinity,
+                    }}
+                    // Note: We duplicate the skills array to create a seamless infinite scroll loop
+                  >
+                    {[...category.skills, ...category.skills].map((skill: Skill, skillIndex: number) => (
+                      <motion.div
+                        key={`${skill.name}-${skillIndex}`}
+                        className="w-32 sm:w-40 flex-shrink-0 group relative"
+                        whileHover={{
+                          y: -10,
+                          scale: 1.05,
+                          transition: { type: "spring", stiffness: 300 }
+                        }}
                       >
-                        <div className="relative z-10 p-2 rounded-lg bg-background/50 group-hover:bg-background/80 transition-colors">
-                          <SkillIcon name={skill.name} categoryColor={category.color} />
-                        </div>
-                        <span className="font-medium text-sm text-foreground-muted group-hover:text-foreground transition-colors">
-                          {skill.name}
-                        </span>
-                        
-                        {/* Hover glow effect */}
-                        <div className={`absolute inset-0 rounded-xl bg-gradient-to-br from-${colorBase}-500/5 to-${colorBase}-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
-                      </Card>
-                    </motion.div>
-                  ))}
+                        <Card
+                          variant="default"
+                          hover={false}
+                          className={`h-full flex flex-col items-center justify-center p-4 sm:p-6 gap-3 sm:gap-4 text-center border-border/50 hover:border-${colorBase}-500/60 bg-background/60 backdrop-blur-sm relative overflow-hidden transition-all duration-300`}
+                        >
+                          <div className={`absolute inset-0 bg-gradient-to-br from-${colorBase}-500/0 via-transparent to-${colorBase}-500/5 opacity-0 group-hover:opacity-100 transition-all duration-500`} />
+
+                          <div className={`absolute -inset-0.5 rounded-xl bg-gradient-to-br from-${colorBase}-500/0 to-${colorBase}-500/0 group-hover:from-${colorBase}-500/50 group-hover:to-transparent opacity-0 group-hover:opacity-100 blur-md transition-all duration-500`} />
+
+                          <div className={`relative z-10 p-2 sm:p-3 rounded-xl bg-background/50 group-hover:bg-background/80 shadow-inner border border-transparent group-hover:border-${colorBase}-500/20 transition-all duration-300`}>
+                            <SkillIcon name={skill.name} categoryColor={category.color} />
+                          </div>
+
+                          <span className={`relative z-10 font-bold text-xs sm:text-sm text-foreground-muted group-hover:text-${colorBase}-500 transition-colors duration-300 drop-shadow-sm`}>
+                            {skill.name}
+                          </span>
+                        </Card>
+                      </motion.div>
+                    ))}
+                  </motion.div>
                 </div>
               </motion.div>
             );

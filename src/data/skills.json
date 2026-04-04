@@ -32,7 +32,8 @@
     "skills": [
       { "name": "Python", "level": 92 },
       { "name": "Bash Scripting", "level": 88 },
-      { "name": "C/C++", "level": 75 },
+      { "name": "C", "level": 80 },
+      { "name": "C++", "level": 75 },
       { "name": "JavaScript", "level": 70 },
       { "name": "SQL", "level": 80 },
       { "name": "PowerShell", "level": 72 }
@@ -56,15 +57,24 @@
     "icon": "Terminal",
     "color": "text-green-500",
     "skills": [
+      { "name": "Linux", "level": 90 },
       { "name": "Kali Linux", "level": 95 },
       { "name": "Wireshark", "level": 88 },
+      { "name": "VScode", "level": 90 },
+      { "name": "Wazuh", "level": 80 },
       { "name": "Git", "level": 88 },
       { "name": "Nessus", "level": 78 },
-      { "name": "Hashcat", "level": 82 },
-      { "name": "Postman", "level": 85 }
+      { "name": "Hashcat", "level": 82 }
     ]
   },
   "other": [
+    "LaTeX",
+    "Networking",
+    "DSA",
+    "Database",
+    "Discrete Mathematics",
+    "Kali Tools",
+    "Cybersecurity Knowledge",
     "OWASP Top 10",
     "API Security",
     "Active Directory",

@@ -7,3 +7,4 @@ export { Extracurriculars } from "./Extracurriculars";
 export { Contact } from "./Contact";
 export { Badges } from "./Badges";
 export { Thesis } from "./Thesis";
+export { Courses } from "./Courses";

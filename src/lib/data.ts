@@ -6,6 +6,7 @@ import certificationsData from "@/data/certifications.json";
 import educationData from "@/data/education.json";
 import activitiesData from "@/data/activities.json";
 import socialsData from "@/data/socials.json";
+import coursesData from "@/data/courses.json";
 
 // Re-export all data from JSON files
 export const personalInfo = personalData;
@@ -15,6 +16,7 @@ export const certifications = certificationsData;
 export const education = educationData;
 export const activities = activitiesData;
 export const socialLinks = socialsData;
+export const courses = coursesData;
 
 // Navigation Links (static)
 export const navLinks = [
@@ -168,4 +170,23 @@ export interface SocialLink {
   name: string;
   url: string;
   icon: string;
+}
+
+export interface Course {
+  semester: string;
+  code: string;
+  title: string;
+  credit: string;
+}
+
+export interface CourseLevel {
+  title: string;
+  status: "completed" | "coming_soon";
+  courses: Course[];
+}
+
+export interface CoursesData {
+  undergraduate: CourseLevel;
+  postgraduate: CourseLevel;
+  doctorate: CourseLevel;
 }

@@ -7,6 +7,7 @@ import {
   Certificates,
   Badges,
   Thesis,
+  Courses,
   Extracurriculars,
   Contact,
 } from "@/components/sections";
@@ -18,6 +19,9 @@ export default function Home() {
       <main className="min-h-screen">
         <Hero />
         <About />
+        <Skills />
+        <Projects />
+        <Courses />
         <Certificates />
         <Thesis />
         <Badges />

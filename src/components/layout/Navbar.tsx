@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "framer-motion";
 import { Menu, X, Shield } from "lucide-react";
 import { ThemeSwitcher } from "@/components/theme";
 import { navLinks } from "@/lib/data";
@@ -11,6 +11,23 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const backgroundGradient = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [
+      "linear-gradient(to right, var(--primary), var(--primary))",
+      "linear-gradient(to right, var(--primary), var(--secondary))",
+      "linear-gradient(to right, var(--primary), var(--secondary), var(--accent))"
+    ]
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -153,6 +170,15 @@ export function Navbar() {
           )}
         </AnimatePresence>
       </nav>
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-[3px] md:h-[4px] origin-left z-50"
+        style={{
+          scaleX,
+          background: backgroundGradient,
+          boxShadow: "0 0 10px rgba(5, 150, 105, 0.5)",
+        }}
+      />
     </motion.header>
   );
 }

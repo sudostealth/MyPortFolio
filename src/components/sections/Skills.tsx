@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   Crosshair, 
   Code, 
@@ -13,11 +13,13 @@ import {
   Server, 
   Zap,
   Layers,
-  Wrench
+  Wrench,
+  X
 } from "lucide-react";
 import Image from "next/image";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 import { skillsCategories, SkillCategory, Skill } from "@/lib/data";
 
 // Fallback icon map for categories
@@ -65,14 +67,63 @@ const getSlug = (name: string) => {
 };
 
 const SkillIcon = ({ name, categoryColor }: { name: string; categoryColor: string }) => {
+  const [imgSrc, setImgSrc] = useState<string | null>(null);
   const [error, setError] = useState(false);
   const slug = getSlug(name);
-  const iconUrl = `https://cdn.simpleicons.org/${slug}/${categoryColor.replace('text-', '').replace('-500', '')}`;
 
-  if (error) {
-    // Return a generic generated initial avatar if icon not found
+  useEffect(() => {
+    // Some mapping for Devicon specific naming conventions
+    const deviconMap: Record<string, string> = {
+      "cplusplus": "cplusplus-plain",
+      "c": "c-plain",
+      "csharp": "csharp-plain",
+      "go": "go-original-wordmark",
+      "python": "python-original",
+      "javascript": "javascript-plain",
+      "html5": "html5-plain",
+      "css3": "css3-plain",
+      "bash": "bash-plain",
+      "php": "php-plain",
+      "docker": "docker-plain",
+      "git": "git-plain",
+      "github": "github-original",
+      "linux": "linux-plain",
+      "ubuntu": "ubuntu-plain",
+      "windows": "windows8-original",
+      "apple": "apple-original",
+      "android": "android-plain",
+      "mysql": "mysql-plain",
+      "postgresql": "postgresql-plain",
+      "mongodb": "mongodb-plain",
+      "react": "react-original",
+      "nextjs": "nextjs-original",
+      "nodejs": "nodejs-plain",
+      "express": "express-original",
+      "visualstudiocode": "vscode-plain",
+      "dot-net": "dot-net-plain-wordmark"
+    };
+
+    const deviconSlug = deviconMap[slug] || `${slug}-plain`;
+    const deviconUrl = `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${slug}/${deviconSlug}.svg`;
+
+    // Test if Devicon exists, otherwise fallback to SimpleIcons
+    const img = new window.Image();
+    img.src = deviconUrl;
+    img.onload = () => setImgSrc(deviconUrl);
+    img.onerror = () => {
+      // Fallback to simpleicons using the default brand color (by omitting the color parameter)
+      const simpleIconUrl = `https://cdn.simpleicons.org/${slug}`;
+      const simpleImg = new window.Image();
+      simpleImg.src = simpleIconUrl;
+      simpleImg.onload = () => setImgSrc(simpleIconUrl);
+      simpleImg.onerror = () => setError(true);
+    };
+  }, [slug]);
+
+  if (error || !imgSrc) {
+    // Return a generic generated initial avatar if icon not found or while loading
     return (
-      <div className={`w-10 h-10 rounded-lg flex items-center justify-center bg-background border border-border ${categoryColor} font-bold text-lg`}>
+      <div className={`w-10 h-10 rounded-lg flex items-center justify-center bg-background border border-border ${categoryColor} font-bold text-lg animate-pulse`}>
         {name.slice(0, 2).toUpperCase()}
       </div>
     );
@@ -80,12 +131,10 @@ const SkillIcon = ({ name, categoryColor }: { name: string; categoryColor: strin
 
   return (
     <div className="w-10 h-10 relative flex items-center justify-center">
-      {/* Try to load the icon from SimpleIcons CDN */}
       <img
-        src={iconUrl}
+        src={imgSrc}
         alt={`${name} logo`}
-        className="w-8 h-8 object-contain filter drop-shadow-lg transition-transform hover:scale-110"
-        onError={() => setError(true)}
+        className="w-8 h-8 object-contain filter drop-shadow-lg transition-all duration-500 transform group-hover:scale-125 group-hover:-rotate-12 group-hover:drop-shadow-[0_0_8px_rgba(0,255,0,0.5)]"
         loading="lazy"
       />
     </div>
@@ -93,6 +142,8 @@ const SkillIcon = ({ name, categoryColor }: { name: string; categoryColor: strin
 };
 
 export function Skills() {
+  const [selectedCategory, setSelectedCategory] = useState<{key: string, data: SkillCategory} | null>(null);
+
   // Dynamically get all categories that are objects (excluding 'other' array)
   const categories = Object.entries(skillsCategories).filter(
     ([key, value]) => key !== "other" && typeof value === "object" && !Array.isArray(value)
@@ -134,11 +185,22 @@ export function Skills() {
                   <div className={`p-3 rounded-xl bg-background border border-border/50 shadow-lg ${category.color} bg-opacity-10`}>
                     <IconComponent className={`w-8 h-8 ${category.color}`} />
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-foreground capitalize">
-                      {category.title || key}
-                    </h3>
-                    <div className="h-1 w-20 rounded-full bg-gradient-to-r from-primary to-transparent mt-2 opacity-50" />
+                  <div className="flex-1 flex justify-between items-center">
+                    <div>
+                      <h3 className="text-2xl font-bold text-foreground capitalize">
+                        {category.title || key}
+                      </h3>
+                      <div className="h-1 w-20 rounded-full bg-gradient-to-r from-primary to-transparent mt-2 opacity-50" />
+                    </div>
+
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setSelectedCategory({key, data: category})}
+                      className="hidden sm:flex text-sm"
+                    >
+                      View All
+                    </Button>
                   </div>
                 </div>
 
@@ -190,6 +252,18 @@ export function Skills() {
                     ))}
                   </motion.div>
                 </div>
+
+                {/* Mobile View All Button */}
+                <div className="mt-4 flex justify-end sm:hidden">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setSelectedCategory({key, data: category})}
+                    className="text-sm"
+                  >
+                    View All
+                  </Button>
+                </div>
               </motion.div>
             );
           })}
@@ -226,6 +300,103 @@ export function Skills() {
           </motion.div>
         )}
       </div>
+
+      {/* Modal for View All */}
+      <AnimatePresence>
+        {selectedCategory && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedCategory(null)}
+              className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-4xl max-h-[85vh] bg-background-secondary border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-6 border-b border-border/50">
+                <div className="flex items-center gap-3">
+                  {(() => {
+                    const CatIcon = categoryIcons[selectedCategory.key.toLowerCase()] ||
+                                (selectedCategory.data.icon && categoryIcons[selectedCategory.data.icon.toLowerCase()]) ||
+                                categoryIcons.default;
+                    return (
+                      <div className={`p-2 rounded-lg bg-background border border-border/50 ${selectedCategory.data.color} bg-opacity-10`}>
+                        <CatIcon className={`w-6 h-6 ${selectedCategory.data.color}`} />
+                      </div>
+                    );
+                  })()}
+                  <h3 className="text-2xl font-bold text-foreground capitalize">
+                    {selectedCategory.data.title || selectedCategory.key} Skills
+                  </h3>
+                </div>
+                <button
+                  onClick={() => setSelectedCategory(null)}
+                  className="p-2 rounded-full hover:bg-background transition-colors text-foreground-muted hover:text-foreground"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              {/* Modal Content - Grid */}
+              <div className="p-6 overflow-y-auto custom-scrollbar flex-1">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {selectedCategory.data.skills.map((skill: Skill, index: number) => {
+                    const colorClassMap: Record<string, string> = {
+                      red: "hover:border-red-500/60",
+                      blue: "hover:border-blue-500/60",
+                      green: "hover:border-green-500/60",
+                      yellow: "hover:border-yellow-500/60",
+                      purple: "hover:border-purple-500/60",
+                      orange: "hover:border-orange-500/60",
+                      cyan: "hover:border-cyan-500/60",
+                      gray: "hover:border-gray-500/60"
+                    };
+                    const innerColorClassMap: Record<string, string> = {
+                      red: "group-hover:border-red-500/20",
+                      blue: "group-hover:border-blue-500/20",
+                      green: "group-hover:border-green-500/20",
+                      yellow: "group-hover:border-yellow-500/20",
+                      purple: "group-hover:border-purple-500/20",
+                      orange: "group-hover:border-orange-500/20",
+                      cyan: "group-hover:border-cyan-500/20",
+                      gray: "group-hover:border-gray-500/20"
+                    };
+                    const colorBase = selectedCategory.data.color?.split("-")[1] || "gray";
+                    const hoverBorderClass = colorClassMap[colorBase] || colorClassMap.gray;
+                    const innerHoverBorderClass = innerColorClassMap[colorBase] || innerColorClassMap.gray;
+                    return (
+                      <motion.div
+                        key={skill.name}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                      >
+                        <Card
+                          variant="default"
+                          className={`h-full flex flex-col items-center justify-center p-4 gap-3 text-center border-border/50 ${hoverBorderClass} bg-background/60 transition-all duration-300 group`}
+                        >
+                          <div className={`p-3 rounded-xl bg-background shadow-inner border border-transparent ${innerHoverBorderClass} transition-all duration-300`}>
+                            <SkillIcon name={skill.name} categoryColor={selectedCategory.data.color} />
+                          </div>
+                          <span className="font-bold text-sm text-foreground-muted group-hover:text-foreground transition-colors duration-300">
+                            {skill.name}
+                          </span>
+                        </Card>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

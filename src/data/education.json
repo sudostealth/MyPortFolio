@@ -7,5 +7,23 @@
     "year": "2023 - Current",
     "description": "Specializing in Cybersecurity and Network Engineering. Relevant coursework includes Computer Networks, Cryptography, Information Security, and Operating Systems.",
     "gpa": "3.84/4.00"
+  },
+  {
+    "id": 2,
+    "degree": "Higher Seconday Certificate(HSC) in Science",
+    "institution": "Charfasion Govt College",
+    "location": "Charfasion, Bhola,Barishal, Bangladesh",
+    "year": "2018 - 2020",
+    "description": "Specializing in Cybersecurity and Network Engineering. Relevant coursework includes Computer Networks, Cryptography, Information Security, and Operating Systems.",
+    "gpa": "5.00/5.00"
+  },
+  {
+    "id": 3,
+    "degree": "Sceondary School Certificate(SSC) in Science",
+    "institution": "Aminabad Secondary School",
+    "location": "Charfasion,Bhola,Barishal,Bangladesh",
+    "year": "2016-2018"                                                                                                  ,
+    "description": "Specializing in Cybersecurity and Network Engineering. Relevant coursework includes Computer Networks, Cryptography, Information Security, and Operating Systems.",
+    "gpa": "5.00/5.00"
   }
 ]

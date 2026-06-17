@@ -31,7 +31,8 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      // If we've scrolled past the landing hero (approx 100vh), show navbar
+      setScrolled(window.scrollY > window.innerHeight - 100);
 
       // Update active section based on scroll position
       const sections = navLinks.map((link) => link.href.replace("#", ""));
@@ -48,6 +49,8 @@ export function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
+    // Initial check
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -59,16 +62,15 @@ export function Navbar() {
     }
   };
 
+  // Hide Navbar completely when not scrolled down past the landing hero
+  if (!scrolled) return null;
+
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "glass shadow-lg shadow-primary/5"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass shadow-lg shadow-primary/5`}
     >
       <nav className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">

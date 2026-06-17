@@ -1,0 +1,31 @@
+
+> my-portfolio@0.1.0 dev
+> next dev
+
+⚠ Port 3000 is in use by an unknown process, using available port 3001 instead.
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://192.168.0.2:3001
+
+✓ Starting...
+✓ Ready in 1310ms
+○ Compiling / ...
+ GET / 200 in 9.3s (compile: 8.4s, render: 954ms)
+ GET /images/projects/scanner.png 404 in 1628ms (compile: 1168ms, render: 460ms)
+ GET /images/projects/fuzzer.png 404 in 1606ms (compile: 1093ms, render: 513ms)
+ GET /images/projects/ctf.png 404 in 1605ms (compile: 1327ms, render: 278ms)
+ GET /images/certs/pnpt.png 404 in 1596ms (compile: 1221ms, render: 375ms)
+ GET /images/projects/dashboard.png 404 in 1601ms (compile: 1272ms, render: 329ms)
+ GET /images/projects/phishing.png 404 in 1607ms (compile: 1370ms, render: 238ms)
+ GET /images/certs/htb.png 404 in 170ms (compile: 12ms, render: 157ms)
+ GET /images/certs/thm.png 404 in 170ms (compile: 64ms, render: 106ms)
+THM API Error, using fallback: Error: Failed to fetch from TryHackMe
+    at GET (src/app/api/thm/route.ts:49:13)
+  47 |
+  48 |     if (!response.ok) {
+> 49 |       throw new Error('Failed to fetch from TryHackMe');
+     |             ^
+  50 |     }
+  51 |
+  52 |     const data = await response.json();
+ GET /api/thm 200 in 1410ms (compile: 838ms, render: 571ms)

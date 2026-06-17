@@ -29,9 +29,14 @@ export function Navbar() {
     ]
   );
 
+  const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+
+      // Only show the navbar after scrolling past the new PortfolioHero (100vh - a small buffer)
+      setIsVisible(window.scrollY > window.innerHeight - 100);
 
       // Update active section based on scroll position
       const sections = navLinks.map((link) => link.href.replace("#", ""));
@@ -48,6 +53,7 @@ export function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // initialize state
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -62,13 +68,13 @@ export function Navbar() {
   return (
     <motion.header
       initial={{ y: -100 }}
-      animate={{ y: 0 }}
+      animate={{ y: isVisible ? 0 : -100 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? "glass shadow-lg shadow-primary/5"
           : "bg-transparent"
-      }`}
+      } ${!isVisible ? "pointer-events-none" : ""}`}
     >
       <nav className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">

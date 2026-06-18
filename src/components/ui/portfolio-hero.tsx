@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import personalData from "@/data/personal.json";
 import { useTheme } from "next-themes";
+import AnimatedBackground from "./animated-background";
 
 // BlurText animation component
 interface BlurTextProps {
@@ -119,10 +120,10 @@ export default function PortfolioHero() {
   ];
 
   const handleScrollDown = () => {
-    const mainContent = document.getElementById("main-content");
-    if (mainContent) {
-      mainContent.scrollIntoView({ behavior: "smooth" });
-    }
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: "smooth"
+    });
   };
 
   // Safe checks for theme after mount
@@ -141,6 +142,9 @@ export default function PortfolioHero() {
     <div className="relative min-h-screen text-foreground transition-colors bg-background flex flex-col justify-between">
       {/* Grid Pattern Background to match theme */}
       <div className="absolute inset-0 grid-pattern opacity-50 pointer-events-none" />
+
+      {/* Animated Flowing Lines Background */}
+      <AnimatedBackground />
 
       {/* Hero Section */}
       <main className="flex-1 relative flex flex-col justify-center items-center">

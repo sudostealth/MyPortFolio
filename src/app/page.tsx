@@ -38,7 +38,23 @@ export default function Home() {
         animation: gsap.to(newHeroRef.current, {
           clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
           ease: "none"
-        })
+        }),
+        onLeave: (self) => {
+          setTimeout(() => {
+            if (newHeroRef.current) {
+              newHeroRef.current.style.display = "none";
+            }
+            // Record current scroll position
+            const currentScroll = window.scrollY;
+            const spacerHeight = window.innerHeight;
+
+            // Kill the ScrollTrigger and its pin spacer
+            self.kill(true);
+
+            // Restore the scroll position visually to avoid jumping
+            window.scrollTo(0, currentScroll - spacerHeight);
+          }, 0);
+        }
       });
     }, containerRef);
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "framer-motion";
 import { Menu, X, Shield } from "lucide-react";
@@ -30,13 +30,31 @@ export function Navbar() {
   );
 
   const [isVisible, setIsVisible] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+    // Initialize on mount
+    lastScrollY.current = window.scrollY;
 
-      // Only show the navbar after scrolling past the new PortfolioHero (100vh - a small buffer)
-      setIsVisible(window.scrollY > window.innerHeight - 100);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      setScrolled(currentScrollY > 50);
+
+      // Only evaluate show/hide if we are past the Hero section
+      if (currentScrollY > window.innerHeight - 100) {
+        // If scrolling up, show navbar. If scrolling down, hide navbar.
+        if (currentScrollY < lastScrollY.current) {
+          setIsVisible(true);
+        } else if (currentScrollY > lastScrollY.current) {
+          setIsVisible(false);
+        }
+      } else {
+        // If we are at the top (in the Hero section), hide it
+        setIsVisible(false);
+      }
+
+      lastScrollY.current = currentScrollY;
 
       // Update active section based on scroll position
       const sections = navLinks.map((link) => link.href.replace("#", ""));

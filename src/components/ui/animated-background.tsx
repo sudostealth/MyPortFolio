@@ -1,119 +1,67 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { useTheme } from "next-themes";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
-export default function AnimatedBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { theme, systemTheme } = useTheme();
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animationFrameId: number;
-    let width = 0;
-    let height = 0;
-
-    const currentTheme = theme === "system" ? systemTheme : theme;
-
-    // Use tailwind/css variable colors, typically primary is emerald for light, green/cyan for dark
-    // For simplicity, we use the primary RGB representation, matched roughly to globals.css
-    // Function to parse the CSS variable and convert it to RGB string
-    const getPrimaryRgb = () => {
-      if (typeof window === 'undefined') return '5, 150, 105'; // fallback
-
-      // Create a temporary element to let the browser compute the exact RGB value of the variable
-      const tempEl = document.createElement('div');
-      tempEl.style.color = 'var(--primary)';
-      tempEl.style.display = 'none';
-      document.body.appendChild(tempEl);
-
-      const computedColor = getComputedStyle(tempEl).color;
-      document.body.removeChild(tempEl);
-
-      // computedColor is reliably 'rgb(r, g, b)' or 'rgba(r, g, b, a)' in modern browsers
-      const match = computedColor.match(/\d+/g);
-      if (match && match.length >= 3) {
-        return `${match[0]}, ${match[1]}, ${match[2]}`;
-      }
-
-      // Fallbacks matching the original global.css
-      return currentTheme === "dark" ? "0, 255, 0" : "5, 150, 105";
-    };
-
-    const baseColor = getPrimaryRgb();
-
-    const resize = () => {
-      // Set actual size in memory (scaled to account for extra pixel density)
-      const scale = window.devicePixelRatio || 1;
-      width = window.innerWidth;
-      height = window.innerHeight;
-
-      canvas.width = width * scale;
-      canvas.height = height * scale;
-      ctx.scale(scale, scale);
-
-      canvas.style.width = width + 'px';
-      canvas.style.height = height + 'px';
-    };
-
-    window.addEventListener('resize', resize);
-    resize();
-
-    // Line properties
-    const lines = Array.from({ length: 5 }).map(() => ({
-      yOffset: Math.random() * height,
-      amplitude: 50 + Math.random() * 100,
-      frequency: 0.001 + Math.random() * 0.002,
-      phase: Math.random() * Math.PI * 2,
-      speed: 0.0005 + Math.random() * 0.001,
-    }));
-
-    const draw = (time: number) => {
-      ctx.clearRect(0, 0, width, height);
-
-      lines.forEach((line, index) => {
-        ctx.beginPath();
-        for (let x = 0; x <= width; x += 10) {
-          // Complex wave: combination of two sines for more organic feel
-          const y = line.yOffset
-            + Math.sin(x * line.frequency + line.phase + time * line.speed) * line.amplitude
-            + Math.sin(x * (line.frequency * 1.5) + line.phase + time * (line.speed * 1.2)) * (line.amplitude * 0.5);
-
-          if (x === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
-        }
-
-        // Vary opacity per line for depth
-        const opacity = 0.05 + (0.1 * (index / lines.length));
-        ctx.strokeStyle = `rgba(${baseColor}, ${opacity})`;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      });
-
-      animationFrameId = requestAnimationFrame(draw);
-    };
-
-    draw(0);
-
-    return () => {
-      window.removeEventListener('resize', resize);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, [theme, systemTheme]);
+function FloatingPaths({ position }: { position: number }) {
+  const paths = Array.from({ length: 36 }, (_, i) => ({
+    id: i,
+    d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
+      380 - i * 5 * position
+    } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
+      152 - i * 5 * position
+    } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
+      684 - i * 5 * position
+    } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
+    width: 0.5 + i * 0.03,
+  }));
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 z-0 pointer-events-none"
-      aria-hidden="true"
-    />
+    <div className="absolute inset-0 pointer-events-none">
+      <svg
+        className="w-full h-full text-primary"
+        viewBox="0 0 696 316"
+        fill="none"
+      >
+        <title>Background Paths</title>
+        {paths.map((path) => (
+          <motion.path
+            key={path.id}
+            d={path.d}
+            stroke="currentColor"
+            strokeWidth={path.width}
+            strokeOpacity={0.05 + path.id * 0.015} // Lowered opacity so it remains ambient
+            initial={{ pathLength: 0.3, opacity: 0.6 }}
+            animate={{
+              pathLength: 1,
+              opacity: [0.2, 0.5, 0.2],
+              pathOffset: [0, 1, 0],
+            }}
+            transition={{
+              duration: 20 + Math.random() * 10,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+export default function AnimatedBackground() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  return (
+    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      <FloatingPaths position={1} />
+      <FloatingPaths position={-1} />
+    </div>
   );
 }

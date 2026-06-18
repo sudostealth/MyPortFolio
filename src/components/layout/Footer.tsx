@@ -26,7 +26,7 @@ export function Footer() {
       <div className="absolute inset-0 grid-pattern opacity-30" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
       
-      <div className="relative container-custom pt-20 pb-10">
+      <div className="relative container-custom pt-32 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">
           
           {/* Brand Column */}

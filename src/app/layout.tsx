@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "John Doe | Cybersecurity Enthusiast & Red Team Specialist",
+  title: "MD. SAZIB | Cybersecurity Enthusiast & Red Team Specialist",
   description:
     "Portfolio of a 4th-year CSE student specializing in Red Teaming, Ethical Hacking, and Penetration Testing. Explore my security projects, certifications, and journey in offensive security.",
   keywords: [
@@ -26,20 +26,20 @@ export const metadata: Metadata = {
     "CTF",
     "Bug Bounty",
   ],
-  authors: [{ name: "John Doe" }],
-  creator: "John Doe",
+  authors: [{ name: "MD. SAZIB" }],
+  creator: "MD. SAZIB",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://yourportfolio.com",
-    title: "John Doe | Cybersecurity Portfolio",
+    title: "MD. SAZIB | Cybersecurity Portfolio",
     description:
       "Red Team Specialist | Ethical Hacker | Security Researcher",
-    siteName: "John Doe Portfolio",
+    siteName: "MD. SAZIB Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "John Doe | Cybersecurity Portfolio",
+    title: "MD. SAZIB | Cybersecurity Portfolio",
     description:
       "Red Team Specialist | Ethical Hacker | Security Researcher",
     creator: "@yourusername",
@@ -47,6 +47,11 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+  },
+  icons: {
+    icon: "https://avatars.githubusercontent.com/u/122990604?v=4",
+    shortcut: "https://avatars.githubusercontent.com/u/122990604?v=4",
+    apple: "https://avatars.githubusercontent.com/u/122990604?v=4",
   },
 };
 

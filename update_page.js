@@ -1,4 +1,11 @@
+const fs = require('fs');
 
+let pageContent = fs.readFileSync('src/app/page.tsx', 'utf-8');
+
+// I need to properly export Home component so the build handles it
+// and make sure there are no rendering errors. The current error might be "window is not defined".
+
+pageContent = `
 "use client";
 
 import React, { useEffect, useRef } from "react";
@@ -28,12 +35,13 @@ export default function Home() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // Pin the whole container over the top part of main-content
+      // Pin the PortfolioHero over the top part of main-content
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: "top top",
         end: () => "+=" + (window.innerHeight),
-        pin: true,
+        pin: newHeroRef.current, // ONLY pin the overlay, NOT the whole container!
+        pinSpacing: false,
         scrub: 1,
         animation: gsap.to(newHeroRef.current, {
           clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
@@ -84,3 +92,6 @@ export default function Home() {
     </div>
   );
 }
+`;
+
+fs.writeFileSync('src/app/page.tsx', pageContent);

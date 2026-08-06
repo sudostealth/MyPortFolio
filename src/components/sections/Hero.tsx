@@ -6,6 +6,7 @@ import { ArrowDown, FileText, Mail, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Typewriter } from "@/components/ui/Typewriter";
 import { Terminal } from "@/components/ui/Terminal";
+import { CipherText } from "@/components/ui/CipherText";
 import { personalInfo, typewriterPhrases } from "@/lib/data";
 
 export function Hero() {
@@ -99,7 +100,7 @@ export function Hero() {
             {/* Main Heading */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
               Hi, I&apos;m{" "}
-              <span className="gradient-text">{personalInfo.name}</span>
+              <CipherText text={personalInfo.name} className="gradient-text inline-block min-w-[200px]" />
             </h1>
 
             {/* Typewriter Effect */}

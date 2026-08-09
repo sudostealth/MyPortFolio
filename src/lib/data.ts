@@ -7,6 +7,8 @@ import educationData from "@/data/education.json";
 import activitiesData from "@/data/activities.json";
 import socialsData from "@/data/socials.json";
 import coursesData from "@/data/courses.json";
+import professionalData from "@/data/professional.json";
+import extracurricularData from "@/data/extracurricular.json";
 
 // Re-export all data from JSON files
 export const personalInfo = personalData;
@@ -17,6 +19,8 @@ export const education = educationData;
 export const activities = activitiesData;
 export const socialLinks = socialsData;
 export const courses = coursesData;
+export const professional = professionalData;
+export const extracurricular = extracurricularData;
 
 // Navigation Links (static)
 export const navLinks = [
@@ -189,4 +193,31 @@ export interface CoursesData {
   undergraduate: CourseLevel;
   postgraduate: CourseLevel;
   doctorate: CourseLevel;
+}
+
+export interface ProfessionalExperience {
+  id: string;
+  category: string;
+  role_title: string;
+  organization_name: string;
+  organization_logo: string;
+  start_date: string;
+  end_date: string;
+  is_active: boolean;
+  description: string;
+  key_responsibilities: string[];
+  technologies_used: string[];
+  reference_links?: { title: string; url: string }[];
+}
+
+export interface ExtracurricularActivity {
+  id: string;
+  category: string;
+  role_title: string;
+  event_or_group_name: string;
+  event_or_group_logo: string;
+  date_or_duration: string;
+  description: string;
+  key_achievements: string[];
+  credential_or_proof_link?: string;
 }

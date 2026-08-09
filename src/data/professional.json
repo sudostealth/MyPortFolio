@@ -1,0 +1,25 @@
+[
+  {
+    "id": "prof-01",
+    "category": "Mentorship",
+    "role_title": "Student Mentor",
+    "organization_name": "Virtual Gaming Society",
+    "organization_logo": "/images/logos/vgs-logo.png",
+    "start_date": "Jan 2026",
+    "end_date": "Present",
+    "is_active": true,
+    "description": "Mentoring students in competitive gaming strategies and general team coordination.",
+    "key_responsibilities": [
+      "Guided multiple teams through national level tournaments.",
+      "Conducted weekly strategic meetings and performance reviews.",
+      "Fostered a collaborative and supportive environment."
+    ],
+    "technologies_used": ["Discord", "Google Meet", "OBS Studio"],
+    "reference_links": [
+      {
+        "title": "VGS Official Site",
+        "url": "#"
+      }
+    ]
+  }
+]

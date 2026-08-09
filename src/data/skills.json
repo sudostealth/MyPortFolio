@@ -39,19 +39,6 @@
       { "name": "PowerShell", "level": 72 }
     ]
   },
-  "cloud": {
-    "title": "Cloud & DevOps",
-    "icon": "Server",
-    "color": "text-cyan-500",
-    "skills": [
-      { "name": "Docker", "level": 85 },
-      { "name": "Kubernetes", "level": 70 },
-      { "name": "AWS", "level": 75 },
-      { "name": "Azure", "level": 70 },
-      { "name": "Terraform", "level": 65 },
-      { "name": "CI/CD", "level": 80 }
-    ]
-  },
   "tools": {
     "title": "Tools & OS",
     "icon": "Terminal",

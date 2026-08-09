@@ -1,10 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, GraduationCap, ExternalLink, Calendar, MapPin } from "lucide-react";
+import { Award, ShieldCheck, LockOpen } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Card } from "@/components/ui/Card";
-import { certifications, education } from "@/lib/data";
+import { certifications } from "@/lib/data";
 
 interface Certification {
   id: number;
@@ -17,19 +16,8 @@ interface Certification {
   description: string;
 }
 
-interface Education {
-  id: number;
-  degree: string;
-  institution: string;
-  location: string;
-  year: string;
-  description: string;
-  gpa: string;
-}
-
 export function Certificates() {
   const certificationsList = certifications as Certification[];
-  const educationList = education as Education[];
 
   return (
     <section
@@ -42,11 +30,11 @@ export function Certificates() {
       <div className="container-custom relative">
         <SectionHeading
           title="Certifications"
-          subtitle="cat /credentials - Professional certifications and education"
+          subtitle="cat /credentials - Professional certifications"
         />
 
         {/* Certifications Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-16">
           {certificationsList.map((cert: Certification, index: number) => (
             <motion.div
               key={cert.id}
@@ -54,124 +42,60 @@ export function Certificates() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
+              className="relative group h-full"
             >
-              <Card className="h-full text-center group">
+              <div className="h-full flex flex-col p-4 bg-[#0a0a0a] rounded-xl border border-border group-hover:border-primary/60 group-hover:shadow-[0_0_15px_rgba(34,255,136,0.15)] transition-all duration-300 relative overflow-hidden z-10">
+                {/* Subtle top glow on hover */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
                 {/* Certificate Image */}
-                <div className="relative w-full max-w-[240px] mx-auto mb-5 aspect-[593/837] overflow-hidden rounded-2xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-border group-hover:border-primary transition-colors">
+                <div className="relative w-full aspect-square mx-auto mb-4 overflow-hidden rounded-lg bg-background-secondary flex items-center justify-center p-2 border border-border/50 group-hover:border-primary/30 transition-colors">
                   {cert.image ? (
                     <img
                       src={cert.image}
                       alt={cert.name}
-                      className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-contain filter drop-shadow-md group-hover:drop-shadow-[0_0_8px_rgba(34,255,136,0.3)] transition-all duration-300"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <Award className="w-16 h-16 text-primary/50" />
-                    </div>
+                    <Award className="w-12 h-12 text-primary/50" />
                   )}
+                  {/* Unlocked overlay */}
+                  <div className="absolute top-2 right-2 bg-background/80 p-1.5 rounded-full backdrop-blur-sm border border-border group-hover:border-primary/50 transition-colors">
+                    <LockOpen className="w-3 h-3 text-primary" />
+                  </div>
                 </div>
 
-                {/* Certificate Name */}
-                <h3 className="text-xl font-bold text-primary mb-1">
-                  {cert.name}
-                </h3>
-                <p className="text-sm text-foreground mb-2">{cert.fullName}</p>
+                {/* Content */}
+                <div className="flex-grow flex flex-col items-center text-center">
+                  <h3 className="text-base font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
+                    {cert.name}
+                  </h3>
+                  <p className="text-[10px] sm:text-xs text-foreground-muted mb-3 flex-grow line-clamp-2">
+                    {cert.fullName}
+                  </p>
+                </div>
 
-                {/* Issuer & Date */}
-                <p className="text-xs text-foreground-muted mb-1">
-                  {cert.issuer}
-                </p>
-                <p className="text-xs text-foreground-muted flex items-center justify-center gap-1">
-                  <Calendar className="w-3 h-3" />
-                  {cert.date}
-                </p>
+                {/* Footer */}
+                <div className="mt-auto pt-3 border-t border-border/50 flex flex-col gap-2 items-center w-full">
+                  <span className="text-[10px] text-foreground-muted font-mono uppercase tracking-wider">
+                    {cert.issuer}
+                  </span>
 
-                {/* Description */}
-                <p className="text-xs text-foreground-muted mt-3 line-clamp-2">
-                  {cert.description}
-                </p>
-
-                {/* Verify Link */}
-                {cert.url && (
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => window.open(cert.url, "_blank")}
-                    className="mt-4 inline-flex items-center gap-1 text-xs text-primary hover:underline"
-                  >
-                    <ExternalLink className="w-3 h-3" />
-                    Verify
-                  </motion.button>
-                )}
-              </Card>
+                  {cert.url && (
+                    <a
+                      href={cert.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center w-full py-1.5 text-[10px] font-medium text-primary bg-primary/5 hover:bg-primary/15 border border-primary/20 rounded-md transition-colors"
+                    >
+                      <ShieldCheck className="w-3 h-3 mr-1" />
+                      Verify Badge
+                    </a>
+                  )}
+                </div>
+              </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* Education Section */}
-        <div className="mt-16">
-          <motion.h3
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-2xl font-bold text-center text-foreground mb-8"
-          >
-            <GraduationCap className="inline-block w-8 h-8 text-primary mr-2" />
-            Education
-          </motion.h3>
-
-          <div className="max-w-3xl mx-auto">
-            {educationList.map((edu: Education, index: number) => (
-              <motion.div
-                key={edu.id}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="relative pl-8 pb-8 last:pb-0"
-              >
-                {/* Timeline line */}
-                <div className="absolute left-0 top-0 bottom-0 w-px bg-border" />
-                
-                {/* Timeline dot */}
-                <div className="absolute left-0 top-0 w-2 h-2 -translate-x-1/2 rounded-full bg-primary ring-4 ring-background" />
-
-                <Card variant="glass" className="ml-4">
-                  {/* Degree */}
-                  <h4 className="text-xl font-bold text-foreground mb-2">
-                    {edu.degree}
-                  </h4>
-
-                  {/* Institution */}
-                  <p className="text-primary font-medium mb-2">
-                    {edu.institution}
-                  </p>
-
-                  {/* Meta Info */}
-                  <div className="flex flex-wrap gap-4 text-sm text-foreground-muted mb-3">
-                    <span className="flex items-center gap-1">
-                      <MapPin className="w-4 h-4" />
-                      {edu.location}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      {edu.year}
-                    </span>
-                    {edu.gpa && (
-                      <span className="text-primary font-mono">
-                        GPA: {edu.gpa}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm text-foreground-muted">
-                    {edu.description}
-                  </p>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </div>
     </section>

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "eca-01",
+    "category": "Competitive Programming & Hackathons or CTF",
+    "role_title": "Participant",
+    "event_or_group_name": "GUB Logic Battle 2025",
+    "event_or_group_logo": "/images/logos/gub-logic.svg",
+    "date_or_duration": "2025",
+    "description": "Participated in university-wide competitive programming contest.",
+    "key_achievements": [
+      "Solved 5 out of 7 algorithmic challenges.",
+      "Ranked Top 20 among 100+ participants."
+    ],
+    "credential_or_proof_link": "#"
+  }
+]

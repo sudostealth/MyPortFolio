@@ -57,7 +57,7 @@ export function Certificates() {
             >
               <Card className="h-full text-center group">
                 {/* Certificate Image */}
-                <div className="relative w-full max-w-[240px] mx-auto mb-5 aspect-square overflow-hidden rounded-2xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-border group-hover:border-primary transition-colors">
+                <div className="relative w-full max-w-[240px] mx-auto mb-5 aspect-[593/837] overflow-hidden rounded-2xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-border group-hover:border-primary transition-colors">
                   {cert.image ? (
                     <img
                       src={cert.image}

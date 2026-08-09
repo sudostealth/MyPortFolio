@@ -7,11 +7,13 @@ import {
   About,
   Skills,
   Projects,
-  Certificates,
-  Badges,
+  Education,
   Thesis,
   Courses,
-  Extracurriculars,
+  Certificates,
+  Badges,
+  ProfessionalExperience,
+  ExtracurricularActivities,
   Contact,
 } from "@/components/sections";
 
@@ -25,11 +27,13 @@ export default function Home() {
           <About />
           <Skills />
           <Projects />
+          <Education />
+          <Thesis />
           <Courses />
           <Certificates />
-          <Thesis />
           <Badges />
-          <Extracurriculars />
+          <ProfessionalExperience />
+          <ExtracurricularActivities />
           <Contact />
         </main>
         <Footer />

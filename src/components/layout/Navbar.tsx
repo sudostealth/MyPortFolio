@@ -29,28 +29,26 @@ export function Navbar() {
     ]
   );
 
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
     // Initialize on mount
     lastScrollY.current = window.scrollY;
 
+    // Set initial state
+    setIsVisible(window.scrollY <= 0);
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
       setScrolled(currentScrollY > 50);
 
-      // Only evaluate show/hide if we are past the Hero section
-      if (currentScrollY > window.innerHeight - 100) {
-        // If scrolling up, show navbar. If scrolling down, hide navbar.
-        if (currentScrollY < lastScrollY.current) {
-          setIsVisible(true);
-        } else if (currentScrollY > lastScrollY.current) {
-          setIsVisible(false);
-        }
-      } else {
-        // If we are at the top (in the Hero section), hide it
+      if (currentScrollY <= 0) {
+        setIsVisible(true);
+      } else if (currentScrollY < lastScrollY.current) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY.current) {
         setIsVisible(false);
       }
 

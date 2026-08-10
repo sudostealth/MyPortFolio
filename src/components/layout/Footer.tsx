@@ -79,18 +79,18 @@ export function Footer() {
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      whileHover={link.name === "GitHub" ? { y: -3, scale: 1.05 } : { y: -3, scale: 1.05 }}
+                      whileHover={{ y: -3, scale: 1.05 }}
                       className="group relative p-3 rounded-lg bg-background-secondary border border-border text-foreground-muted hover:text-primary hover:border-primary/50 hover:bg-primary/5 transition-all shadow-sm overflow-hidden"
                       aria-label={link.name}
                     >
                       {/* Custom Hover Effects based on platform */}
-                      {link.name === "GitHub" && (
+                      {link.name.toLowerCase().includes("github") && (
                          <div className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-primary opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-opacity" />
                       )}
-                      {(link.name === "LinkedIn" || link.name === "Twitter") && (
+                      {(link.name.toLowerCase().includes("linkedin") || link.name.toLowerCase().includes("twitter")) && (
                          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-primary/20 to-transparent -translate-y-full group-hover:translate-y-full transition-transform duration-700 ease-in-out pointer-events-none" />
                       )}
-                      {link.name === "TryHackMe" && (
+                      {link.name.toLowerCase().includes("tryhackme") && (
                          <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-lg z-0" />
                       )}
 

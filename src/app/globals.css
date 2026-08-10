@@ -213,6 +213,30 @@ body {
   left: 100%;
 }
 
+.bg-scanline {
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 255, 0, 0.05) 51%
+  );
+  background-size: 100% 4px;
+}
+
+@keyframes scan-sweep {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.animate-scan-sweep {
+  animation: scan-sweep 10s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scan-sweep {
+    animation: none;
+  }
+}
+
 /* ===== Decrypt Effect ===== */
 .decrypt-effect {
   position: relative;
